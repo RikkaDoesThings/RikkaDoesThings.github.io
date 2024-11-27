@@ -1,0 +1,802 @@
+/* styles.css */
+:root {
+    --main-bg: #000000;
+    --main-purple: #4126a3;
+    --dark-purple: #2a1672;
+    --text-color: #ffffff;
+    --white: #FFFFFF;
+    --white-two: #170C3E;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: var(--main-bg);
+    color: var(--text-color);
+    line-height: 1.6;
+    position: relative;
+}
+
+header {
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem 0;
+    background: var(--main-purple);
+    box-shadow: 0 2px 5px var(--shadow);
+}
+
+/* Container for the entire prompt */
+header h1 {
+    font-family: 'Geist Mono', monospace;
+    font-weight: 200;
+    font-size: 2.5rem;
+    color: var(--white);
+    margin: 0;
+    white-space: nowrap; /* Keep everything on one line */
+}
+
+/* Static '>' prompt at the beginning */
+.prompt {
+    font-size: 2.5rem;
+    color: var(--white);
+    position: relative;
+    top: -0.2rem; /* Adjust for better alignment */
+}
+
+/* Text that will be typed out */
+.cursor-container {
+    display: inline-block;
+    position: relative;
+}
+
+/* Typing animation for the text */
+.text {
+    font-size: 2.5rem;
+    color: var(--white);
+    display: inline;
+    overflow: hidden; /* Hide extra content during typing */
+    white-space: nowrap; /* Ensure text is in a single line */
+    border-right: .15em solid; /* Create the cursor */
+    width: 0; /* Start with no text */
+    animation: typing 2s steps(6) forwards, blink 0.75s step-end infinite; /* Type then blink cursor */
+}
+
+/* Cursor animation */
+@keyframes typing {
+    0% {
+        width: 0; /* No text initially */
+    }
+    100% {
+        width: 6ch; /* Type out 'Rikka' */
+    }
+}
+
+/* Blinking cursor */
+@keyframes blink {
+    0%, 100% {
+        border-color: transparent; /* Cursor off */
+    }
+    50% {
+        border-color: var(--white); /* Cursor on */
+    }
+}
+
+/* Adding blinking effect to '|', alternate between '>Rikka' and '>Rikka|' */
+@keyframes changeText {
+    0%, 100% {
+        content: ">Rikka "; /* Default */
+    }
+    50% {
+        content: ">Rikka|"; /* After typing 'Rikka', add cursor */
+    }
+}
+
+/* Cursor visibility */
+.cursor {
+    position: absolute;
+    font-size: 2.5rem;
+    color: var(--white);
+    right: 0;  /* Keeps the blinking cursor at the end of the text */
+    opacity: 0; /* Initially hide the cursor */
+    animation: blink-caret 0.75s step-end infinite;
+    animation-delay: 4.5s; /* Wait until the typing effect finishes before the cursor starts blinking */
+    visibility: hidden;  /* Initially hidden */
+}
+
+/* Reveal the cursor after typing animation */
+.typed-text.finished + .cursor {
+    visibility: visible; /* Only show when typing animation is done */
+}
+
+/* Ensure typed-text gets the class 'finished' after typing ends */
+.typed-text {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid var(--white); /* Keeps the effect of typing */
+    animation: typing 2.5s steps(6) 1s forwards; /* Typing animation */
+}
+
+.typed-text.finished {
+    border-right: none; /* Remove the cursor when finished typing */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+nav a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: bold;
+    transition: opacity 0.3s;
+}
+
+nav a:hover {
+    opacity: 0.7;
+}
+
+/*.logo h1 {
+    font-family: "Geist Mono", monospace;
+    font-weight: 200;
+    font-size: 2.5rem;
+    color: var(--white);
+    margin: 0;
+    text-align: center;
+}
+*/
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 0.5rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-button {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background: var(--white);
+    color: var(--main-purple);
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 5px var(--shadow);
+}
+
+.nav-button:hover {
+    animation: tilt 0.2s ease-in-out;
+}
+
+@keyframes tilt {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-5deg);
+    }
+    50% {
+        transform: rotate(5deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+}
+
+.hero {
+    background: linear-gradient(135deg, var(--main-purple), var(--dark-purple));
+    color: var(--white);
+    text-align: center;
+    padding: 3rem 2rem;
+    border-radius: 10px;
+    margin: 2rem;
+}
+
+.hero-content {
+    max-width: 600px;
+    margin: auto;
+}
+
+.cta-button {
+    background: var(--white);
+    color: var(--dark-purple);
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.cta-button:hover {
+    background: var(--main-purple);
+    color: var(--white);
+}
+
+section {
+    padding: 2rem;
+}
+
+.about, .skills, .projects, .contact {
+    text-align: center;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+
+/* Projects */
+.project-card {
+    background: var(--main-purple);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px var(--shadow);
+    transition: transform 0.3s;
+    text-align: center;
+    position: relative;
+}
+
+.project-card h3 {
+    font-size: 1.8rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+}
+
+.project-card hr {
+    border: none;
+    height: 2px;
+    background: var(--white);
+    margin: 1rem auto;
+    width: 80%;
+}
+
+.project-card .project-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px var(--shadow);
+    max-height: 150px; /* Ensures consistency for all project images */
+}
+
+.project-card p {
+    color: var(--white);
+    margin: 1rem 0;
+}
+
+.project-card .project-date {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+.project-card .cta-button {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    background: var(--white);
+    color: var(--main-purple);
+    transition: background 0.3s ease;
+    text-decoration: none;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    background: var(--dark-purple);
+}
+
+.project-card:hover .cta-button {
+    background: var(--main-purple);
+    color: var(--white);
+}
+/* End */
+
+
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: var(--dark-purple);
+    color: var(--white);
+    margin-top: 2rem;
+}
+
+.about, .skills {
+    background: var(--main-purple);
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px var(--shadow);
+    text-align: left;
+}
+
+.about h2 {
+    font-size: 2rem;
+    color: var(--white);
+    text-shadow: 1px 1px 5px var(--dark-purple);
+}
+
+.inner-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.about-box {
+    background: #291358;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 3px 7px var(--shadow);
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: var(--white);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.about-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px var(--shadow);
+}
+
+.about-box p {
+    margin: 0;
+}
+
+
+/* About Section Styling */
+.about h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--highlight);
+}
+
+.personal-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+blockquote {
+    font-style: italic;
+    margin: 1rem auto;
+    padding: 1rem;
+    border-left: 4px solid var(--highlight);
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    max-width: 600px;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.skills-snapshot {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.4);
+}
+
+.skills-list {
+    list-style: none;
+    padding: 0;
+    line-height: 1.8;
+}
+
+.skills-list li strong {
+    color: var(--highlight);
+}
+
+/* Fun Facts Section Styling */
+.fun-facts h3 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--highlight);
+}
+
+/* Hover Effect */
+.fun-facts p:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.fun-facts {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.4);
+}
+
+.fun-facts p {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.timeline {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.4);
+}
+
+.timeline ul {
+    list-style: none;
+    padding: 0;
+    line-height: 1.8;
+}
+
+.timeline ul li {
+    margin-bottom: 0.8rem;
+}
+
+.timeline ul li strong {
+    color: var(--highlight);
+}
+
+.about {
+    margin: 3rem auto;
+    max-width: 900px;
+    text-align: left;
+    position: relative;
+    padding: 3rem;
+    background: linear-gradient(135deg, var(--main-purple), var(--dark-purple));
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    color: #FFFFFF;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.about p {
+    position: relative;
+    z-index: 1;
+}
+
+.about h2, .skills h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.about .inner-box {
+    background: #130A34;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px var(--shadow);
+    margin-top: 1.5rem;
+    color: var(--white);
+    text-align: center;
+}
+
+.skills ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.skills li {
+    background: #130A34;
+    color: var(--white);
+    padding: 0.8rem 1.2rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    box-shadow: 0 2px 5px var(--shadow);
+    transition: background 0.5s ease, transform 0.3s ease;
+}
+
+.skills li:hover {
+    transform: translateY(-3px);
+    background: var(--dark-purple);
+}
+
+.skills li::before {
+    content: "🌸";
+    font-size: 1.2rem;
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100px) rotate(10deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.skills li {
+    animation: slideInFromLeft 0.8s ease-out;
+    animation-fill-mode: both;
+    animation-delay: calc(var(--index) * 0.2s);
+    opacity: 0;
+}
+
+.about, .hero-content, .projects h2, .contact h2 {
+    animation: fadeIn 1s ease-out;
+    animation-fill-mode: both;
+    opacity: 0;
+}
+
+@keyframes titleSlideIn {
+    0% {
+        transform: translateX(-200px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+header h1 {
+    animation: titleSlideIn 0.5s ease-out;
+    animation-fill-mode: both;
+    opacity: 0;
+}
+
+#gpllicense:visited {
+    color: lightblue;
+}
+
+#gpllicense:link {
+    color: lightblue;
+}
+
+#discorduser {
+    color: #FFFFFF;
+}
+
+/*#email {
+    color: #FFFFFF;  #6d28d9 ^^^ 
+}*/
+
+.header-image img {
+    width: 100%;
+    height: auto; /* Keeps the aspect ratio */
+    display: block; /* Removes extra space below the image */
+    background-size: cover;
+}
+
+/* Particles */
+section {
+    position: relative;
+    z-index: 1; /* Makes sure the sections are above the floating particles */
+}
+
+/* Particles styles */
+.floating {
+    position: absolute;
+    width: 20px;
+    height: 30px; /* Adjusted to stretch the height */
+    background-color: var(--dark-purple);
+    clip-path: polygon(50% 10%, 100% 40%, 50% 90%, 0% 40%); /* Stretch vertically on top and bottom */
+    animation: float 10s infinite ease-in-out;
+    opacity: 0.7;
+    z-index: -1; /* Keeps the particles behind the content */
+}
+
+/* Float Animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px); /* Subtle floating effect */
+    }
+}
+
+/* Contact Section Styling */
+.contact {
+    text-align: center;
+    padding: 3rem;
+    background: var(--main-purple);
+    color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px var(--shadow);
+    margin: 2rem auto;
+    max-width: 800px;
+}
+
+.contact h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.contact p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 600px;
+    margin: auto;
+    background: #000000;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px var(--shadow);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #FFFFFF;
+}
+
+input, textarea {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid var(--main-purple);
+    border-radius: 5px;
+    background: var(--white-two);
+    color: #FFFFFF;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+input:focus, textarea:focus {
+    outline: 2px solid var(--main-purple);
+}
+
+textarea {
+    resize: vertical;
+    height: 150px;
+}
+
+/* Button Styling */
+.submit-button {
+    padding: 1rem 2rem;
+    background: var(--main-purple);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.submit-button:hover {
+    background: var(--dark-purple);
+}
+
+.submit-button:active {
+    background: var(--main-purple);
+}
+
+.boxlabel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.boxlabel li {
+    background: #130A34;
+    color: var(--white);
+    padding: 0.8rem 1.2rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    box-shadow: 0 2px 5px var(--shadow);
+    transition: background 0.5s ease, transform 0.3s ease;
+}
+
+.boxlabel li:hover {
+    transform: translateY(-3px);
+    background: var(--dark-purple);
+}
+
+.boxlabel li::before {
+    font-size: 1.2rem;
+}
+
+/* Preview Sections */
+.preview-section {
+    padding: 2rem;
+    margin: 2rem auto;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.4);
+    color: var(--text-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.preview-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--highlight);
+}
+
+.preview-section p {
+    font-size: 1.1rem;
+}
+
+.preview-section .preview-link {
+    color: var(--highlight);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.preview-section .preview-link:hover {
+    color: var(--text-color);
+}
+
+.preview-section:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Hero Section Update */
+.hero-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin: 1rem 0;
+}

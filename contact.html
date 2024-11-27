@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rikka's Homepage</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1 class="prompt">
+                <span class="cursor-container">
+                  <span class="text">>Rikka </span> <!-- Initial text -->
+                </span>
+              </h1>
+        </div>
+        <div class="header-image">
+            <img src="https://i.imgur.com/scV47Jr.jpeg" alt="Header Image">
+        </div>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-button">Home</a></li>
+                <li><a href="aboutme.html" class="nav-button">About Me</a></li>
+                <li><a href="skills.html" class="nav-button">Skills</a></li>
+                <li><a href="projects.html" class="nav-button">Projects</a></li>
+                <li><a href="contact.html" class="nav-button">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    
+    <!-- Main Content -->
+    <main>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <h2>Get In Touch</h2>
+            <section id="skills" class="skills">
+                <ul>
+                    <li style="--index: 1;">Interested in working together or need help with your computer? Let's connect!</li>
+                    <li style="--index: 2;"><span id="email">Email: <a href="mailto:rikkadoesthings@gmail.com">RikkaDoesThings@gmail.com</a></span></li>
+                    <li style="--index: 3;"><span id="discorduser">Discord: kishirooo (Username)</span></li>
+                </ul>
+            </section>
+            <div class="form-container">
+                <form action="mailto:rikkadoesthings@gmail.com" method="post" enctype="text/plain">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <div class="mini-box">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <div class="mini-box">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <div class="mini-box">
+                            <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
+            </div>
+
+        </section>
+        
+    </main>
+    
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Rikka. Licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" id="gpllicense">GPL-3.0 License</a>.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
